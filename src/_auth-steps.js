@@ -6,6 +6,7 @@
  *5. create sign in and sign up components
  * 6. add event handler
  * 7. npm install --save react-firebase-hooks
+ * 8.useCreateUserWithEmailAndPassword from firebase hooks
  * /
 
 /**hosting steps

@@ -1,20 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Logo from "../../images/icons8-google.svg";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  // handle email and password
+  const handleEmailBlur = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordBlur = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleUserSignIn = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(email, password);
+  };
+
   return (
     <div className="login-form-container">
       <div>
         <h2 className="form-title">Please login</h2>
-        <form>
+        <form onSubmit={handleUserSignIn}>
           <div className="input-group">
             <label htmlFor="email"> Email</label>
-            <input type="email" name="email" id="" required />
+            <input
+              onBlur={handleEmailBlur}
+              type="email"
+              name="email"
+              id=""
+              required
+            />
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="" required />
+            <input
+              onBlur={handlePasswordBlur}
+              type="password"
+              name="password"
+              id=""
+              required
+            />
           </div>
           <input className="submit-btn" type="submit" value="login" />
         </form>

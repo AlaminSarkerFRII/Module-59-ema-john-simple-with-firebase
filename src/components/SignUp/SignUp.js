@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import Logo from "../../images/icons8-google.svg";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const SignUp = () => {
   //set state
@@ -10,6 +12,10 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  //create auth useCreateUserWithEmailAndPassword
+  const [createUserWithEmailAndPassword, user] =
+    useCreateUserWithEmailAndPassword(auth);
 
   // event handler
   // for email
@@ -36,6 +42,22 @@ const SignUp = () => {
       setError("password didn't match");
       return;
     }
+    if (password.length < 6) {
+      setError("password must be contains at last 6 characters ");
+      return;
+    }
+
+    if (user) {
+      navigate("/shop");
+    }
+
+    createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   return (
@@ -74,6 +96,7 @@ const SignUp = () => {
             />
           </div>
           <p style={{ color: "red" }}> {error}</p>
+
           <input className="submit-btn" type="submit" value="sign up" />
         </form>
         <p>
