@@ -3,7 +3,10 @@
  *2. npm install firebase.
  *3. get firebase auth and setup in firebase.init.js and export auth
  *4. go to authentication and enable email and password
- */
+ *5. create sign in and sign up components
+ * 6. add event handler
+ * 7. npm install --save react-firebase-hooks
+ * /
 
 /**hosting steps
  *
