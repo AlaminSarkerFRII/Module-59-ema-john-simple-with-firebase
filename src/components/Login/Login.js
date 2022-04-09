@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Logo from "../../images/icons8-google.svg";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -7,6 +7,7 @@ import auth from "../../firebase.init";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
@@ -18,6 +19,10 @@ const Login = () => {
   const handlePasswordBlur = (event) => {
     setPassword(event.target.value);
   };
+
+  if (user) {
+    navigate("/shop");
+  }
 
   const handleUserSignIn = (event) => {
     event.preventDefault();
@@ -49,6 +54,8 @@ const Login = () => {
               required
             />
           </div>
+          <p style={{ color: "red" }}>{error?.message}</p>
+          {loading && <p>Loading...</p>}
           <input className="submit-btn" type="submit" value="login" />
         </form>
         <p>
