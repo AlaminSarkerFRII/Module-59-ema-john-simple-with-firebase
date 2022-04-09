@@ -1,0 +1,87 @@
+.login-form-container{
+    width:600px;
+    margin:40px auto;
+    border: 1px solid gray;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 0 3px 0.5s;
+}
+.form-title{
+    font-size: 35px;
+    color:rgb(73, 104, 164);
+    font-weight:400;
+    text-align: center;
+}
+
+/* input field */
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label {
+    display: block;
+    padding: 10px;
+
+}
+.input-group input{
+    width:415px;
+    height:40px;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 25px;
+
+}
+
+/* submit button */
+
+.submit-btn{
+    width:415px;
+    height:40px;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+    background-color: darksalmon;
+    border:none;
+    border-radius: 5px;
+}
+
+p .form-link{
+    font-size: 25px;
+    color:darkorange;
+    margin-left:10px
+}
+
+.hr-line{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:415px;
+    margin:0 auto;
+}
+
+.hr-line hr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:fit-content
+}
+
+.google-sign img{
+    width:35px;
+    height: 35px;
+    margin-right:10px;
+
+}
+
+.google-sign{
+    width:415px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    
+}
