@@ -40,8 +40,8 @@ const Orders = () => {
           {/* <Link to="/inventory">
             <button>Proceed CheckOut</button>
           </Link> */}
-          <button onClick={() => navigate("/inventory")}>
-            Proceed CheckOut
+          <button onClick={() => navigate("/shipment")}>
+            Proceed Shipping
           </button>
         </Cart>
       </div>
