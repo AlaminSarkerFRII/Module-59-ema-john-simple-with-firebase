@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import Logo from "../../images/icons8-google.svg";
-import { Link } from "react-router-dom";
+// import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const Shipment = () => {
+  // const [user] = getAuth(auth);
+  const [user] = useAuthState(auth);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
@@ -14,11 +17,6 @@ const Shipment = () => {
 
   const handleNameBlur = (event) => {
     setName(event.target.value);
-  };
-
-  // for email
-  const handleEmailBlur = (event) => {
-    setEmail(event.target.value);
   };
 
   //handler for password
@@ -34,6 +32,8 @@ const Shipment = () => {
 
   const handleCreateUser = (event) => {
     event.preventDefault();
+    const shipping = { name, address, email, phone };
+    console.log(shipping);
   };
 
   return (
@@ -54,7 +54,7 @@ const Shipment = () => {
           <div className="input-group">
             <label htmlFor="email"> Email</label>
             <input
-              onBlur={handleEmailBlur}
+              value={user?.email}
               type="email"
               name="email"
               id=""
@@ -82,29 +82,11 @@ const Shipment = () => {
             />
           </div>
           <p style={{ color: "red" }}> {error}</p>
-
           <input className="submit-btn" type="submit" value="Add Shipping" />
         </form>
-        <p>
-          Already have an account ?
-          <Link className="form-link" to="/login">
-            Login
-          </Link>
-        </p>
-        <div className="hr-line">
-          <h2>
-            <hr />
-          </h2>
-          <p>or</p>
-          <h2>
-            <hr />
-          </h2>
-        </div>
-        <button className="google-sign">
-          <img src={Logo} alt="" />
-          <h2>Sign In with google</h2>
-        </button>
       </div>
+
+      <h2>Shipment</h2>
     </div>
   );
 };

@@ -37,9 +37,6 @@ const Orders = () => {
       <div className="cart-container">
         <Cart key={products.id} cart={cart}>
           <h3>Inside of Orders</h3>
-          {/* <Link to="/inventory">
-            <button>Proceed CheckOut</button>
-          </Link> */}
           <button onClick={() => navigate("/shipment")}>
             Proceed Shipping
           </button>
