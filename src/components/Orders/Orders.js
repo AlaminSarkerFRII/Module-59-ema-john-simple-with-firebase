@@ -18,9 +18,9 @@ const Orders = () => {
   // remove item
   const handleRemoveItem = (product) => {
     // console.log(product);
-    const rest = cart.map((pd) => pd.id !== product.id);
+    const rest = cart.map((pd) => pd._id !== product._id);
     setCart(rest);
-    removeFromDb(product.id);
+    removeFromDb(product._id);
   };
 
   return (
@@ -28,14 +28,14 @@ const Orders = () => {
       <div className="review-items-container">
         {cart.map((product) => (
           <ReviewItem
-            key={product.id}
+            key={product._id}
             product={product}
             handleRemoveItem={handleRemoveItem}
           ></ReviewItem>
         ))}
       </div>
       <div className="cart-container">
-        <Cart key={products.id} cart={cart}>
+        <Cart key={products._id} cart={cart}>
           <h3>Inside of Orders</h3>
           <button onClick={() => navigate("/shipment")}>
             Proceed Shipping
