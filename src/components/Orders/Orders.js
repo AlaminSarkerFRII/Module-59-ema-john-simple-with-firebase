@@ -9,7 +9,7 @@ import ReviewItem from "../ReviewItem/ReviewItem";
 
 const Orders = () => {
   const [products, setProducts] = useProducts();
-  const [cart, setCart] = useCart(products);
+  const [cart, setCart] = useCart();
 
   // navigate create
 

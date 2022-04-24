@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useProducts from "../../hooks/useProducts";
-import { addToDb, getStoredCart } from "../../utilities/fakedb";
+import useCart from "../../hooks/useCart";
+
+import { addToDb } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
   // const [products, setProducts] = useProducts([]); // use custom hooks
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useCart();
   const [pageCount, setPageCount] = useState(0); // page count kobo
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState();
+  const [pageSize, setPageSize] = useState(10);
 
   // products k different page a load korbo
 
@@ -34,20 +35,6 @@ const Shop = () => {
         setPageCount(page);
       });
   }, []);
-
-  useEffect(() => {
-    const storedCart = getStoredCart();
-    const savedCart = [];
-    for (const id in storedCart) {
-      const addedProduct = products.find((product) => product._id === id);
-      if (addedProduct) {
-        const quantity = storedCart[id];
-        addedProduct.quantity = quantity;
-        savedCart.push(addedProduct);
-      }
-    }
-    setCart(savedCart);
-  }, [products]);
 
   const handleAddToCart = (selectedProduct) => {
     console.log(selectedProduct);
