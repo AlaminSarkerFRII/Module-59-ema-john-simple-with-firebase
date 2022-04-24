@@ -7,11 +7,21 @@ import Product from "../Product/Product";
 import "./Shop.css";
 
 const Shop = () => {
-  const [products, setProducts] = useProducts([]); // use custom hooks
+  // const [products, setProducts] = useProducts([]); // use custom hooks
   const [cart, setCart] = useState([]);
   const [pageCount, setPageCount] = useState(0); // page count kobo
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState();
+
+  // products k different page a load korbo
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/product?page=${page}&pageSize=${pageSize}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [page, pageSize]); // 2 tar upor defend korbe
 
   // counting page number
 
