@@ -8,8 +8,22 @@ import "./Shop.css";
 
 const Shop = () => {
   const [products, setProducts] = useProducts([]); // use custom hooks
-
   const [cart, setCart] = useState([]);
+  const [pageCount, setPageCount] = useState(0); // page count kobo
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState();
+
+  // counting page number
+
+  useEffect(() => {
+    fetch("http://localhost:5000/productCount")
+      .then((res) => res.json())
+      .then((data) => {
+        const count = data.count;
+        const page = Math.ceil(count / 10); // decimal number er jonno ceil
+        setPageCount(page);
+      });
+  }, []);
 
   useEffect(() => {
     const storedCart = getStoredCart();
@@ -54,6 +68,25 @@ const Shop = () => {
             handleAddToCart={handleAddToCart}
           ></Product>
         ))}
+        {/* page number */}
+        <div className="pagination">
+          {[...Array(pageCount).keys()].map((number) => (
+            <button
+              className={page === number ? "selected" : ""}
+              onClick={() => setPage(number)}
+            >
+              {number}
+            </button>
+          ))}
+          <select onChange={(e) => setPageSize(e.target.value)}>
+            <option value="5">5</option>
+            <option value="10" selected>
+              10
+            </option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
       <div className="cart-container">
         <Cart cart={cart}>
